@@ -1,9 +1,7 @@
-﻿using System;
+﻿using CS321_W5D2_BlogAPI.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using CS321_W5D2_BlogAPI.Core.Models;
-using CS321_W5D2_BlogAPI.Core.Services;
 
 namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 {

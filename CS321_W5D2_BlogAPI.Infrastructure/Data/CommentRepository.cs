@@ -1,5 +1,4 @@
-﻿using System;
-using CS321_W5D2_BlogAPI.Core.Models;
+﻿using CS321_W5D2_BlogAPI.Core.Models;
 
 namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 {

@@ -40,6 +40,8 @@ namespace CS321_W5D2_BlogAPI
             // TODO: add your DbContext
 
             // TODO: add identity services
+            services.AddIdentity<AppUser, IdentityRole>()
+             .AddEntityFrameworkStores<AppDbContext>();
 
             // TODO: add JWT support
 

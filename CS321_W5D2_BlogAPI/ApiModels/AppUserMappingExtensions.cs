@@ -15,6 +15,9 @@ namespace CS321_W5D2_BlogAPI.ApiModels
 				Id = user.Id,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
+                FullName = user.FullName != null
+                ? user.FirstName + user.LastName
+                : null,
 				Email = user.Email
 			};
 		}
@@ -26,6 +29,7 @@ namespace CS321_W5D2_BlogAPI.ApiModels
 				Id = userModel.Id,
 				FirstName = userModel.FirstName,
 				LastName = userModel.LastName,
+                FullName = userModel.FullName,
 				Email = userModel.Email
 			};
 		}
