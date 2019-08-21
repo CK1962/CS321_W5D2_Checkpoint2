@@ -33,7 +33,9 @@ namespace CS321_W5D2_BlogAPI.ApiModels
 				Content = postModel.Content,
 				CommentsAllowed = postModel.CommentsAllowed,
                 BlogId = postModel.BlogId,
-                DatePublished = postModel.DatePublished
+                DatePublished = postModel.DatePublished,
+                BlogName = postModel.Blog.Name,
+                AuthorName = postModel.Blog.User.FullName,
 			};
 		}
 

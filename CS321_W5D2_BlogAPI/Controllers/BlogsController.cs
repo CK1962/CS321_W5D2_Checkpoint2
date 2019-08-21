@@ -14,33 +14,37 @@ namespace CS321_W5D2_BlogAPI.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class BlogsController : Controller
+    public class BlogsController : ControllerBase
     {
         private readonly IBlogService _blogService;
 
         // TODO: inject BlogService
-        public BlogsController()
+        public BlogsController(IBlogService blogService)
         {
+            _blogService = blogService;
         }
 
         // GET: api/blogs
+        [HttpGet("/api/blogs/{blogId}")]
         [AllowAnonymous]
-        [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetBlogsByBlogId(int blogId)
         {
             try
             {
                 // TODO: replace the code below with the correct implementation
-                // to return all blogs
-                return Ok(new BlogModel[] {
-                    new BlogModel
-                    {
-                        Id = 1,
-                        Name = "Fix Me!",
-                        Description = "Implement GET /api/blogs",
-                        AuthorName = "unknown",
-                    }
-                });
+                // to return blogs
+                //return Ok(new BlogModel[] {
+                   // new BlogModel
+                   // {
+                   //     Id = 1,
+                    //    Name = "Fix Me!",
+                   //     Description = "Implement GET /api/blogs",
+                   //     AuthorName = "unknown",
+                   // }
+                //});
+                var blogs = _blogService.GetBlog(blogId);
+                var blogModels = blogs.Select(b => b.ToApiModel());
+                return Ok(blogModels);
             }
             catch (Exception ex)
             {
@@ -49,22 +53,24 @@ namespace CS321_W5D2_BlogAPI.Controllers
             }
         }
 
-        // GET api/blogs/{id}
+        // GET api/blogs
         [AllowAnonymous]
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGetAll()]
+        public IEnumerable<Blog> GetAll()
         {
             try
             {
                 // TODO: replace the code below with the correct implementation
-                // to return a blog by id
-                return Ok(new BlogModel
-                {
-                    Id = id,
-                    Name = "Fix Me!",
-                    Description = "Implement GET /api/blogs/{id}",
-                    AuthorName = "unknown",
-                });
+                // to return all blogs
+               // return Ok(new BlogModel
+                //{
+                //    Id = id,
+                //    Name = "Fix Me!",
+                //    Description = "Implement GET /api/blogs/{id}",
+                //    AuthorName = "unknown",
+                //});
+                return _blogService.GetAll();
+
             }
             catch (Exception ex)
             {

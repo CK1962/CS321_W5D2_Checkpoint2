@@ -8,12 +8,22 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
     {
         // TODO: create Blogs, Posts, and Comments DbSets
         public DbSet<Blog> Blogs { get; set; }
+
         public DbSet<Post> Posts { get; set; }
+
         public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+             modelBuilder.Entity<Blog>().HasData();
+
+            modelBuilder.Entity<Post>().HasData(
+                new Post { Id = 1, Name = "Test Post" }
+            );
+
+             modelBuilder.Entity<Comment>().HasData();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

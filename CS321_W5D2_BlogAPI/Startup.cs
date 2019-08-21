@@ -27,7 +27,12 @@ namespace CS321_W5D2_BlogAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(optionsBuilder =>
+                {
+                    optionsBuilder.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -38,23 +43,42 @@ namespace CS321_W5D2_BlogAPI
             services.AddHttpContextAccessor();
 
             // TODO: add your DbContext
+            services.AddDbContext<AppDbContext>();
 
             // TODO: add identity services
             services.AddIdentity<AppUser, IdentityRole>()
              .AddEntityFrameworkStores<AppDbContext>();
 
             // TODO: add JWT support
+             // Add JWT support
+         services.AddAuthentication(options =>
+         {
+             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+         })
+         .AddJwtBearer(options =>
+         {
+             options.TokenValidationParameters = new TokenValidationParameters
+             {
+                 ValidateIssuer = false,
+                 ValidateAudience = false,
+                 ValidateLifetime = true,
+                 ValidateIssuerSigningKey = true,
+                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+             };
+         });
 
 
             services.AddScoped<IUserService, UserService>();
 
             // TODO: add the DbInititializer service
+            services.AddDbContext<AppDbContext>();
 
             // TODO: add your repositories and services
-            //services.AddScoped<IBlogRepository, BlogRepository>();
-            //services.AddScoped<IPostRepository, PostRepository>();
-            //services.AddScoped<IBlogService, BlogService>();
-            //services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IBlogService, BlogService>();
+            services.AddScoped<IPostService, PostService>();
 
         }
 

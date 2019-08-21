@@ -18,9 +18,10 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             // TODO: Implement Get(id). Include related Blog and Blog.User
             return _dbContext.Posts
+               .SingleOrDefault(b => b.Id == id)
                .Include(b => b.Blog)
-               .Include(b => b.Blog.User)
-               .SingleOrDefault(b => b.Id == id);
+               .Include(b => b.Blog.User);
+               
         }
 
         public IEnumerable<Post> GetBlogPosts(int blogId)
@@ -67,14 +68,6 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
                 .ToList();
         }
 
-        //public IEnumerable<Post> GetBlogPosts(int blogId)
-        //{
-        //    return _dbContext.Posts
-        //        .Include(b => b.Blog)
-        //        .Include(b => b.Blog.User)
-        //        .Where(b => b.BlogId == blogId)
-        //        .ToList();
-        //}
 
         public void Remove(int id)
         {
