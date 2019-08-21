@@ -7,7 +7,6 @@ namespace CS321_W5D2_BlogAPI.ApiModels
 {
     public static class BlogMappingExtenstions
     {
-
         public static BlogModel ToApiModel(this Blog blog)
         {
             return new BlogModel
@@ -16,7 +15,7 @@ namespace CS321_W5D2_BlogAPI.ApiModels
                 Name = blog.Name,
                 Description = blog.Description,
                 // TODO: map user's FullName to authorName
-                AuthorName = blog.FullName,
+                AuthorName = blog.User.FullName,
             };
         }
 
@@ -26,8 +25,8 @@ namespace CS321_W5D2_BlogAPI.ApiModels
             {
                 Id = blogModel.Id,
                 Name = blogModel.Name,
-                Description = blogModel.Description,
-                AuthorName = blogModel.FullName,
+                Description = blogModel.Description
+                //User.FullName = blogModel.AuthorName,
             };
         }
 

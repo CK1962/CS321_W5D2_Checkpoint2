@@ -27,7 +27,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         // GET: api/blogs
         [HttpGet("/api/blogs/{blogId}")]
         [AllowAnonymous]
-        public IActionResult GetBlogsByBlogId(int blogId)
+        public IActionResult Get(int blogId)
         {
             try
             {
@@ -42,8 +42,8 @@ namespace CS321_W5D2_BlogAPI.Controllers
                    //     AuthorName = "unknown",
                    // }
                 //});
-                var blogs = _blogService.GetBlog(blogId);
-                var blogModels = blogs.Select(b => b.ToApiModel());
+                var blog = _blogService.Get(blogId);
+                var blogModels = blog.ToApiModel();
                 return Ok(blogModels);
             }
             catch (Exception ex)
@@ -55,21 +55,24 @@ namespace CS321_W5D2_BlogAPI.Controllers
 
         // GET api/blogs
         [AllowAnonymous]
-        [HttpGetAll()]
-        public IEnumerable<Blog> GetAll()
+        [HttpGet()]
+        public IActionResult GetAll()
         {
             try
             {
                 // TODO: replace the code below with the correct implementation
                 // to return all blogs
-               // return Ok(new BlogModel
+                // return Ok(new BlogModel
                 //{
                 //    Id = id,
                 //    Name = "Fix Me!",
                 //    Description = "Implement GET /api/blogs/{id}",
                 //    AuthorName = "unknown",
                 //});
-                return _blogService.GetAll();
+
+                var blogs = _blogService.GetAll();
+                var blogModels = blogs.Select(b => b.ToApiModel());
+                return Ok(blogModels);
 
             }
             catch (Exception ex)

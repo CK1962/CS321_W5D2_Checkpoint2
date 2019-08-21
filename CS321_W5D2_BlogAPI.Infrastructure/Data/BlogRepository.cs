@@ -29,10 +29,9 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             // TODO: Retrieve the blog by id. Include Blog.User.
             return _dbContext.Blogs
-                 .SingleOrDefault(b => b.Id == id)
                  .Include(b => b.Posts)
-                 .Include(b => b.User);
-                 
+                 .Include(b => b.User)
+                 .SingleOrDefault(b => b.Id == id);
         }
 
         public Blog Add(Blog blog)

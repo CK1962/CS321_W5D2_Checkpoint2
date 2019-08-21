@@ -13,17 +13,17 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 
         public DbSet<Comment> Comments { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
-             modelBuilder.Entity<Blog>().HasData();
+            //modelBuilder.Entity<Blog>().HasData();
 
             modelBuilder.Entity<Post>().HasData(
-                new Post { Id = 1, Name = "Test Post" }
+                new Post { Id = 1, Title = "Test Post" }
             );
 
-             modelBuilder.Entity<Comment>().HasData();
+            // modelBuilder.Entity<Comment>().HasData();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

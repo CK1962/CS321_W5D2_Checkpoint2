@@ -1,13 +1,11 @@
-﻿using System;
+﻿using CS321_W5D2_BlogAPI.Core.Models;
 using System.Collections.Generic;
 using System.Linq;
-using CS321_W5D2_BlogAPI.Core.Models;
 
 namespace CS321_W5D2_BlogAPI.ApiModels
 {
-	public static class PostMappingExtenstions
+    public static class PostMappingExtenstions
 	{
-
 		public static PostModel ToApiModel(this Post post)
 		{
 			return new PostModel
@@ -34,8 +32,8 @@ namespace CS321_W5D2_BlogAPI.ApiModels
 				CommentsAllowed = postModel.CommentsAllowed,
                 BlogId = postModel.BlogId,
                 DatePublished = postModel.DatePublished,
-                BlogName = postModel.Blog.Name,
-                AuthorName = postModel.Blog.User.FullName,
+                //BlogName = postModel.Blog.Name,
+                //AuthorName = postModel.Blog.User.FullName,
 			};
 		}
 

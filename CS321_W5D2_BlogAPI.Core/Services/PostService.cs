@@ -22,10 +22,23 @@ namespace CS321_W5D2_BlogAPI.Core.Services
             // TODO: Prevent users from adding to a blog that isn't theirs
             //     Use the _userService to get the current users id.
             //     You may have to retrieve the blog in order to check user id
+
+            // get user for blog
+            var blogId = newPost.BlogId;
+            var blog = _blogRepository.Get(blogId);
+            var blogUserId = blog.UserId;
+
+            var loggedInUserId = _userService.CurrentUserId;
+
+            if (loggedInUserId != blogUserId)
+            {
+                throw new Exception("Cannot add post to blog that doesn't belong to you.");
+            }
+
             // TODO: assign the current date to DatePublished
-            return _postRepository
-                .Add(newPost)
-                .DatePublished.Now();
+            newPost.DatePublished = DateTime.Now;
+
+            return _postRepository.Add(newPost);
         }
 
         public Post Get(int id)

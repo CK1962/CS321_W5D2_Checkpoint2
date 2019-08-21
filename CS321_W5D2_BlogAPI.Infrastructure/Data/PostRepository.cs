@@ -18,10 +18,9 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             // TODO: Implement Get(id). Include related Blog and Blog.User
             return _dbContext.Posts
-               .SingleOrDefault(b => b.Id == id)
                .Include(b => b.Blog)
-               .Include(b => b.Blog.User);
-               
+               .Include(b => b.Blog.User)
+               .SingleOrDefault(b => b.Id == id);
         }
 
         public IEnumerable<Post> GetBlogPosts(int blogId)
