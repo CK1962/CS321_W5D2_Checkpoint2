@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CS321_W5D2_BlogAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
@@ -30,6 +31,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         }
 
         // POST api/values
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegistrationModel registration)
         {
